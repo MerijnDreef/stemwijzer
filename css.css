@@ -1,11 +1,15 @@
-.eens {
+#eens {
     background-color:green;
 }
 
-.gvb {
+#gvb {
     background-color:honeydew;
 }
 
-.oneens {
+#oneens {
     background-color:red;
+}
+
+.hidden{
+    display:none;
 }
