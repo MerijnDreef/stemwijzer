@@ -1,5 +1,17 @@
+body {
+  height: 100%;
+}
+
+html {
+    background-image: url('image/Mainbackground.png');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #eens {
-    background-color:green;
+    background-color:rgb(44, 218, 44);
 }
 
 #gvb {
@@ -10,6 +22,14 @@
     background-color:red;
 }
 
-.hidden{
-    display:none;
+.hidden {
+    display: none;
+}
+
+.stem {
+    color:blue;
+}
+
+#stemwijzer {
+    font-weight: bold;
 }
