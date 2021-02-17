@@ -99,4 +99,7 @@ function hide(element) {
   element.classList.add("hidden");
 }
 
+function checkVraag({
+  //checked of vragen niet beantwoord zijn
+})
 var keus = []; 
