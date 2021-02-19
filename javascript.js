@@ -23,11 +23,15 @@ next.addEventListener ("click", function() {
   console.log(subjects);
   if ( (subjects.length -1) == currentSubject) {
     //stop
-    currentSubject--;
+    checkVraag();
+    // currentSubject--;
   } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
+    document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
+    document.getElementById("oneens").style.backgroundColor = "red";
+    document.getElementById("gvb").style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -43,6 +47,24 @@ previous.addEventListener ("click", function() {
     currentSubject--;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
+
+      if (keus[currentSubject] == "pro") {
+        document.getElementById("eens").style.backgroundColor = "blue";
+        document.getElementById("oneens").style.backgroundColor = "red";
+        document.getElementById("gvb").style.backgroundColor = "honeydew";
+      } else if (keus[currentSubject] == "contra") {
+        document.getElementById("oneens").style.backgroundColor = "blue";
+        document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
+        document.getElementById("gvb").style.backgroundColor = "honeydew";
+      } else if (keus[currentSubject] == "none") {
+        document.getElementById("gvb").style.backgroundColor = "blue";
+        document.getElementById("oneens").style.backgroundColor = "red";
+        document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
+      } else {
+        document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
+        document.getElementById("oneens").style.backgroundColor = "red";
+        document.getElementById("gvb").style.backgroundColor = "honeydew";
+      }
   }
   console.log(currentSubject);
 });
@@ -51,11 +73,15 @@ eens.addEventListener ("click", function() {
   vulKeus("pro");
   if ( (subjects.length -1) == currentSubject) {
     //no entry
+    checkVraag();
     currentSubject--;
   } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
+    document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
+    document.getElementById("oneens").style.backgroundColor = "red";
+    document.getElementById("gvb").style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -64,11 +90,15 @@ gvb.addEventListener ("click", function() {
   vulKeus("none");
   if ( (subjects.length -1) == currentSubject) {
     //no further
+    checkVraag();
     currentSubject--;
   } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
+    document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
+    document.getElementById("oneens").style.backgroundColor = "red";
+    document.getElementById("gvb").style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -77,11 +107,15 @@ oneens.addEventListener ("click", function() {
   vulKeus("contra");
   if ( (subjects.length -1) == currentSubject) {
     //you shall not pass
+    checkVraag();
     currentSubject--;
   } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
+    document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
+    document.getElementById("oneens").style.backgroundColor = "red";
+    document.getElementById("gvb").style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -99,7 +133,22 @@ function hide(element) {
   element.classList.add("hidden");
 }
 
-function checkVraag({
+function checkVraag(){
   //checked of vragen niet beantwoord zijn
-})
+  var teller = 0;
+  for (var i = 0; i < subjects.length; i++){
+    if (keus[i] === ""){
+      //effe tellen
+      teller++;
+    } else {
+     //resultaat
+    }
+  }
+  if (teller != 0){
+    alert(teller);
+  } else {
+
+  }
+
+}
 var keus = []; 
