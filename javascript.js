@@ -147,7 +147,33 @@ function checkVraag(){
   if (teller != 0){
     alert(teller);
   } else {
+      var partijScore = [];
 
+        for(var i = 0; i < keus.length; i++) {
+          for(var h = 0; h < subjects.length; h++) {
+            for(var l = 0; l < subject[h].parties.length; l++) {
+              var vind = false;
+              for(var y = 0; y < partijScore.length; y++) {
+                vind = true;
+                if(partijScore[y].name == antwoord[h].parties[k].name) {
+                  partijScore[h]++;
+                } else {
+                  partijScore[h]--;
+                }
+                break;
+              }
+              if(!found) {
+                var score;
+                if(antwoord[h] == subject[h].parties[l].position) {
+                  score = 1;
+                } else {
+                  score = -1;
+                }
+                partijScore.push({name: antwoord[h].name, score: score});
+              }
+            }
+          }
+        }
   }
 
 }

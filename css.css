@@ -33,3 +33,18 @@ html {
 #stemwijzer {
     font-weight: bold;
 }
+
+#startContainer {
+    text-align: center;
+    background-color:white;
+    margin: 0rem, 5rem, 5rem, 5rem;
+    padding-bottom: 3rem;
+    border-radius: 5px;
+}
+
+#container {
+    text-align: center;
+    background-color:white;
+    margin: 0rem, 5rem, 5rem, 5rem;
+    padding-bottom: 3rem;
+}
