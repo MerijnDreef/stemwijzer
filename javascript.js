@@ -48,15 +48,15 @@ previous.addEventListener ("click", function() {
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
 
-      if (keus[currentSubject] == "pro") {
+      if (keuzes[currentSubject] == "pro") {
         document.getElementById("eens").style.backgroundColor = "blue";
         document.getElementById("oneens").style.backgroundColor = "red";
         document.getElementById("gvb").style.backgroundColor = "honeydew";
-      } else if (keus[currentSubject] == "contra") {
+      } else if (keuzes[currentSubject] == "contra") {
         document.getElementById("oneens").style.backgroundColor = "blue";
         document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
         document.getElementById("gvb").style.backgroundColor = "honeydew";
-      } else if (keus[currentSubject] == "none") {
+      } else if (keuzes[currentSubject] == "none") {
         document.getElementById("gvb").style.backgroundColor = "blue";
         document.getElementById("oneens").style.backgroundColor = "red";
         document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
@@ -121,8 +121,8 @@ oneens.addEventListener ("click", function() {
 });
 
 function vulKeus(insert) {
-  keus[currentSubject] = insert;
-  console.log(keus);
+  keuzes[currentSubject] = insert;
+  console.log(keuzes);
 }
 
 function show(element) {
@@ -137,26 +137,43 @@ function checkVraag(){
   //checked of vragen niet beantwoord zijn
   var teller = 0;
   for (var i = 0; i < subjects.length; i++){
-    if (keus[i] === "") {
+    if (keuzes[i] === "") {
       //effe tellen
       teller++;
-    } else {
-     //resultaat
     }
   }
   if (teller != 0){
     alert(teller);
   } else {
-     for (var k = 0; k < keus.length; k++) {
+     for (var k = 0; k < keuzes.length; k++) {
       for (var l = 0; l < subjects[k].parties.length; l++) {
 
-        titel.innerHTML = subjects[k].parties[l].name
+       if (keuzes[k] == subjects[k].parties[l].position) {   
+      //pro, contra, none
+        if (keuzes[k] == "pro") {
+          partijPunten[k].pro++;
+          console.log(partijPunten);
+        } else if (keuzes[k] == "none") {
+          partijPunten[k].none++;
+          console.log(partijPunten);
+        } else {
+          partijPunten[k].contra++;
+          console.log(partijPunten);
+        }
+       }
+        
       }
      }
   }
 
 }
 
-var keus = []; 
+var partijPunten = [{
+  "pro": 0,
+  "none": 0,
+  "contra": 0,
+}]
+
+var keuzes = []; 
 
 //if array in array do array[0].array1[0].name
