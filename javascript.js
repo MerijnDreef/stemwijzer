@@ -133,7 +133,7 @@ function hide(element) {
   element.classList.add("hidden");
 }
 
-function checkVraag(){
+function checkVraag() {
   //checked of vragen niet beantwoord zijn
   var teller = 0;
   for (var i = 0; i < subjects.length; i++){
@@ -145,6 +145,11 @@ function checkVraag(){
   if (teller != 0){
     alert(teller);
   } else {
+
+    for (var g = 0; g < parties.length; g++) {
+      partijPunten.push({name: parties[g].name, points: 0});
+    }
+
      for (var k = 0; k < keuzes.length; k++) {
       for (var l = 0; l < subjects[k].parties.length; l++) {
 
@@ -168,11 +173,7 @@ function checkVraag(){
 
 }
 
-var partijPunten = [{
-  "pro": 0,
-  "none": 0,
-  "contra": 0,
-}]
+var partijPunten = [];
 
 var keuzes = []; 
 
