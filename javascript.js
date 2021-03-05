@@ -154,16 +154,20 @@ function checkVraag() {
       for (var l = 0; l < subjects[k].parties.length; l++) {
 
        if (keuzes[k] == subjects[k].parties[l].position) {   
-      //pro, contra, none
-        if (keuzes[k] == "pro") {
-          partijPunten[k].pro++;
-          console.log(partijPunten);
-        } else if (keuzes[k] == "none") {
-          partijPunten[k].none++;
-          console.log(partijPunten);
-        } else {
-          partijPunten[k].contra++;
-          console.log(partijPunten);
+        //pro, contra, none
+        for (var p = 0; p < partijPunten.length; p++) {
+          if (partijPunten[p].name == subjects[k].parties[l].name) {
+            if (keuzes[k] == "pro") {
+              partijPunten[p].points++;
+              console.log(partijPunten);
+            } else if (keuzes[k] == "none") {
+              partijPunten[p].points++;
+              console.log(partijPunten);
+            } else if (keuzes[k] == "contra") {
+              partijPunten[p].points++;
+              console.log(partijPunten);
+            }
+          }
         }
        }
         
