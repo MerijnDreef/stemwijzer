@@ -29,9 +29,9 @@ next.addEventListener ("click", function() {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
-    document.getElementById("oneens").style.backgroundColor = "red";
-    document.getElementById("gvb").style.backgroundColor = "honeydew";
+    eens.style.backgroundColor = "rgb(44, 218, 44)";
+    oneens.style.backgroundColor = "red";
+    gvb.style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -49,21 +49,21 @@ previous.addEventListener ("click", function() {
     statement.innerHTML = subjects[currentSubject].statement;
 
       if (keuzes[currentSubject] == "pro") {
-        document.getElementById("eens").style.backgroundColor = "blue";
-        document.getElementById("oneens").style.backgroundColor = "red";
-        document.getElementById("gvb").style.backgroundColor = "honeydew";
+        eens.style.backgroundColor = "blue";
+        oneens.style.backgroundColor = "red";
+        gvb.style.backgroundColor = "honeydew";
       } else if (keuzes[currentSubject] == "contra") {
-        document.getElementById("oneens").style.backgroundColor = "blue";
-        document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
-        document.getElementById("gvb").style.backgroundColor = "honeydew";
+        oneens.style.backgroundColor = "blue";
+        eens.style.backgroundColor = "rgb(44, 218, 44)";
+        gvb.style.backgroundColor = "honeydew";
       } else if (keuzes[currentSubject] == "none") {
-        document.getElementById("gvb").style.backgroundColor = "blue";
-        document.getElementById("oneens").style.backgroundColor = "red";
-        document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
+        gvb.style.backgroundColor = "blue";
+        oneens.style.backgroundColor = "red";
+        eens.style.backgroundColor = "rgb(44, 218, 44)";
       } else {
-        document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
-        document.getElementById("oneens").style.backgroundColor = "red";
-        document.getElementById("gvb").style.backgroundColor = "honeydew";
+        eens.style.backgroundColor = "rgb(44, 218, 44)";
+        oneens.style.backgroundColor = "red";
+        gvb.style.backgroundColor = "honeydew";
       }
   }
   console.log(currentSubject);
@@ -79,9 +79,9 @@ eens.addEventListener ("click", function() {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
-    document.getElementById("oneens").style.backgroundColor = "red";
-    document.getElementById("gvb").style.backgroundColor = "honeydew";
+    eens.style.backgroundColor = "rgb(44, 218, 44)";
+    oneens.style.backgroundColor = "red";
+    gvb.style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -96,9 +96,9 @@ gvb.addEventListener ("click", function() {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
-    document.getElementById("oneens").style.backgroundColor = "red";
-    document.getElementById("gvb").style.backgroundColor = "honeydew";
+    eens.style.backgroundColor = "rgb(44, 218, 44)";
+    oneens.style.backgroundColor = "red";
+    gvb.style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -113,9 +113,9 @@ oneens.addEventListener ("click", function() {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    document.getElementById("eens").style.backgroundColor = "rgb(44, 218, 44)";
-    document.getElementById("oneens").style.backgroundColor = "red";
-    document.getElementById("gvb").style.backgroundColor = "honeydew";
+    eens.style.backgroundColor = "rgb(44, 218, 44)";
+    oneens.style.backgroundColor = "red";
+    gvb.style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -176,6 +176,39 @@ function checkVraag() {
   }
 
 }
+
+ onderwerpen = [
+   "Vaccinatiebewijs", 
+   "Defensiebudget", 
+   "Gratis kinderopvang", 
+   "Nederland uit EU", 
+   "Rekeningrijden", 
+   "Vuurwerk", 
+   "Vleesbelasting", 
+   "Publieke omroep", 
+   "Zorgfonds", 
+   "Gezichtsbedekkende kleding", 
+   "Volkshuisvesting", 
+   "Btw op kunst cultuur", 
+   "Kerncentrale", 
+   "Woningen op landbouwgrond",
+   "Belastingvoordeel huishoudens", 
+   "Excuses slavenhandel", 
+   "Correctief referendum", 
+   "Inkomen leraren", 
+   "Gevangenisstraffen", 
+   "Vliegbelasting", 
+   "Inburgering op locatie", 
+   "Legalisering softdrugs", 
+   "Nederlandstalig hoger onderwijs", 
+   "Voltooid leven", 
+   "Koppeling minimumloon en bijstand", 
+   "Sociale huurwoning", 
+   "Boeren bedrijven", 
+   "Middenschool", 
+   "Vluchtelingen opnemen", 
+   "Mondkapjesplicht"];
+
 
 var partijPunten = [];
 
