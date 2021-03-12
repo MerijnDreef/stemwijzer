@@ -151,7 +151,9 @@ function checkVraag() {
     }
 
      for (var k = 0; k < keuzes.length; k++) {
-      for (var l = 0; l < subjects[k].parties.length; l++) {
+      for (var l = 0; l < subjects[k].parties.length; l++) {  
+        //probeer eens nou die vragen gewicht te geven, misschien kan je tenminste iets doen
+        
 
        if (keuzes[k] == subjects[k].parties[l].position) {   
         //pro, contra, none
@@ -176,38 +178,6 @@ function checkVraag() {
   }
 
 }
-
- onderwerpen = [
-   "Vaccinatiebewijs", 
-   "Defensiebudget", 
-   "Gratis kinderopvang", 
-   "Nederland uit EU", 
-   "Rekeningrijden", 
-   "Vuurwerk", 
-   "Vleesbelasting", 
-   "Publieke omroep", 
-   "Zorgfonds", 
-   "Gezichtsbedekkende kleding", 
-   "Volkshuisvesting", 
-   "Btw op kunst cultuur", 
-   "Kerncentrale", 
-   "Woningen op landbouwgrond",
-   "Belastingvoordeel huishoudens", 
-   "Excuses slavenhandel", 
-   "Correctief referendum", 
-   "Inkomen leraren", 
-   "Gevangenisstraffen", 
-   "Vliegbelasting", 
-   "Inburgering op locatie", 
-   "Legalisering softdrugs", 
-   "Nederlandstalig hoger onderwijs", 
-   "Voltooid leven", 
-   "Koppeling minimumloon en bijstand", 
-   "Sociale huurwoning", 
-   "Boeren bedrijven", 
-   "Middenschool", 
-   "Vluchtelingen opnemen", 
-   "Mondkapjesplicht"];
 
 
 var partijPunten = [];
