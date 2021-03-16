@@ -2,14 +2,16 @@ let currentSubject = 0;
 
 const startContainer = document.getElementById("startContainer");
 const start = document.getElementById("start");
-const eens = document.getElementById("eens");
-const gvb = document.getElementById("gvb");
-const oneens = document.getElementById("oneens");
+const agree = document.getElementById("eens");
+const neither = document.getElementById("gvb");
+const disagree = document.getElementById("oneens");
 const titel = document.getElementById("titel");
 const statement = document.getElementById("uitspraak");
-const next = document.getElementById("overslaan");
+const skip = document.getElementById("overslaan");
 const previous = document.getElementById("vorige");
 const container = document.getElementById("container");
+
+displayImportant();
 
 start.addEventListener ("click", function() {
     show(container);
@@ -18,20 +20,20 @@ start.addEventListener ("click", function() {
     hide(startContainer);
   });
 
-next.addEventListener ("click", function() {
-  vulKeus("");
+skip.addEventListener ("click", function() {
+  fillChoice("");
   console.log(subjects);
   if ( (subjects.length -1) == currentSubject) {
     //stop
-    checkVraag();
+    checkQuestion();
     // currentSubject--;
   } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    eens.style.backgroundColor = "rgb(44, 218, 44)";
-    oneens.style.backgroundColor = "red";
-    gvb.style.backgroundColor = "honeydew";
+    agree.style.backgroundColor = "rgb(44, 218, 44)";
+    disagree.style.backgroundColor = "red";
+    neither.style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
@@ -48,81 +50,81 @@ previous.addEventListener ("click", function() {
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
 
-      if (keuzes[currentSubject] == "pro") {
-        eens.style.backgroundColor = "blue";
-        oneens.style.backgroundColor = "red";
-        gvb.style.backgroundColor = "honeydew";
-      } else if (keuzes[currentSubject] == "contra") {
-        oneens.style.backgroundColor = "blue";
-        eens.style.backgroundColor = "rgb(44, 218, 44)";
-        gvb.style.backgroundColor = "honeydew";
-      } else if (keuzes[currentSubject] == "none") {
-        gvb.style.backgroundColor = "blue";
-        oneens.style.backgroundColor = "red";
-        eens.style.backgroundColor = "rgb(44, 218, 44)";
+      if (choices[currentSubject] == "pro") {
+        agree.style.backgroundColor = "blue";
+        disagree.style.backgroundColor = "red";
+        neither.style.backgroundColor = "honeydew";
+      } else if (choices[currentSubject] == "contra") {
+        disagree.style.backgroundColor = "blue";
+        agree.style.backgroundColor = "rgb(44, 218, 44)";
+        neither.style.backgroundColor = "honeydew";
+      } else if (choices[currentSubject] == "none") {
+        neither.style.backgroundColor = "blue";
+        disagree.style.backgroundColor = "red";
+        agree.style.backgroundColor = "rgb(44, 218, 44)";
       } else {
         eens.style.backgroundColor = "rgb(44, 218, 44)";
-        oneens.style.backgroundColor = "red";
-        gvb.style.backgroundColor = "honeydew";
+        disagree.style.backgroundColor = "red";
+        neither.style.backgroundColor = "honeydew";
       }
   }
   console.log(currentSubject);
 });
 
-eens.addEventListener ("click", function() {
-  vulKeus("pro");
+agree.addEventListener ("click", function() {
+  fillChoice("pro");
   if ( (subjects.length -1) == currentSubject) {
     //no entry
-    checkVraag();
+    checkQuestion();
     currentSubject--;
   } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    eens.style.backgroundColor = "rgb(44, 218, 44)";
-    oneens.style.backgroundColor = "red";
-    gvb.style.backgroundColor = "honeydew";
+    agree.style.backgroundColor = "rgb(44, 218, 44)";
+    disagree.style.backgroundColor = "red";
+    neither.style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
 
-gvb.addEventListener ("click", function() {
-  vulKeus("none");
+neither.addEventListener ("click", function() {
+  fillChoice("none");
   if ( (subjects.length -1) == currentSubject) {
     //no further
-    checkVraag();
+    checkQuestion();
     currentSubject--;
   } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    eens.style.backgroundColor = "rgb(44, 218, 44)";
-    oneens.style.backgroundColor = "red";
-    gvb.style.backgroundColor = "honeydew";
+    agree.style.backgroundColor = "rgb(44, 218, 44)";
+    disagree.style.backgroundColor = "red";
+    neither.style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
 
-oneens.addEventListener ("click", function() {
-  vulKeus("contra");
+disagree.addEventListener ("click", function() {
+  fillChoice("contra");
   if ( (subjects.length -1) == currentSubject) {
     //you shall not pass
-    checkVraag();
+    checkQuestion();
     currentSubject--;
   } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    eens.style.backgroundColor = "rgb(44, 218, 44)";
-    oneens.style.backgroundColor = "red";
-    gvb.style.backgroundColor = "honeydew";
+    agree.style.backgroundColor = "rgb(44, 218, 44)";
+    disagree.style.backgroundColor = "red";
+    neither.style.backgroundColor = "honeydew";
   }
   console.log(currentSubject);
 });
 
-function vulKeus(insert) {
-  keuzes[currentSubject] = insert;
-  console.log(keuzes);
+function fillChoice(insert) {
+  choices[currentSubject] = insert;
+  console.log(choices);
 }
 
 function show(element) {
@@ -133,39 +135,39 @@ function hide(element) {
   element.classList.add("hidden");
 }
 
-function checkVraag() {
+function checkQuestion() {
   //checked of vragen niet beantwoord zijn
-  var teller = 0;
+  var counter = 0;
   for (var i = 0; i < subjects.length; i++){
-    if (keuzes[i] === "") {
+    if (choices[i] === "") {
       //effe tellen
-      teller++;
+      counter++;
     }
   }
-  if (teller != 0){
-    alert(teller);
+  if (counter != 0){
+    alert(counter);
   } else {
 
     for (var g = 0; g < parties.length; g++) {
       partijPunten.push({name: parties[g].name, points: 0});
     }
 
-     for (var k = 0; k < keuzes.length; k++) {
+     for (var k = 0; k < choices.length; k++) {
       for (var l = 0; l < subjects[k].parties.length; l++) {  
         //probeer eens nou die vragen gewicht te geven, misschien kan je tenminste iets doen
         
 
-       if (keuzes[k] == subjects[k].parties[l].position) {   
+       if (choices[k] == subjects[k].parties[l].position) {   
         //pro, contra, none
         for (var p = 0; p < partijPunten.length; p++) {
           if (partijPunten[p].name == subjects[k].parties[l].name) {
-            if (keuzes[k] == "pro") {
+            if (choices[k] == "pro") {
               partijPunten[p].points++;
               console.log(partijPunten);
-            } else if (keuzes[k] == "none") {
+            } else if (choices[k] == "none") {
               partijPunten[p].points++;
               console.log(partijPunten);
-            } else if (keuzes[k] == "contra") {
+            } else if (choices[k] == "contra") {
               partijPunten[p].points++;
               console.log(partijPunten);
             }
@@ -179,9 +181,27 @@ function checkVraag() {
 
 }
 
+function displayImportant() {
+  //per stelling blok maken met een vinkje en een stelling titel aan container
+  //hoe maak ik element in een bestaand element
+  for (i = 0; i < subjects.length; i++) {
+    console.log(subjects[i].title);
+    var label = document.createElement("label");
+    var li = document.createElement("li");
+    li.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "checkbox");
+    input.myId = i;
+    input.setAttribute("id", "input-" + i.toString())
+    li.appendChild(input);
+    label.innerHTML = subjects[i].title;
+    document.getElementById("important").appendChild(li);
+  }
+}
+
 
 var partijPunten = [];
 
-var keuzes = []; 
+var choices = []; 
 
 //if array in array do array[0].array1[0].name
