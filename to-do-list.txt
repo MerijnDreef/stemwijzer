@@ -3,5 +3,5 @@ change to english - DONE
 make stuff easier to understand
 exceptions at end
 change the important to above(afhandeling onderaan)
-no styling in code styling in css
+no styling in code, styling in css
 too much dry fix that
