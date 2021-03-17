@@ -10,15 +10,15 @@ html {
     background-size: cover;
 }
 
-#eens {
+.eens {
     background-color:rgb(44, 218, 44);
 }
 
-#gvb {
+.gvb {
     background-color:honeydew;
 }
 
-#oneens {
+.oneens {
     background-color:red;
 }
 

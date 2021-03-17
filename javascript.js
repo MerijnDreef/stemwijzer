@@ -11,8 +11,6 @@ const skip = document.getElementById("overslaan");
 const previous = document.getElementById("vorige");
 const container = document.getElementById("container");
 
-displayImportant();
-
 start.addEventListener ("click", function() {
     show(container);
     titel.innerHTML = subjects[currentSubject].title;
@@ -23,17 +21,18 @@ start.addEventListener ("click", function() {
 skip.addEventListener ("click", function() {
   fillChoice("");
   console.log(subjects);
-  if ( (subjects.length -1) == currentSubject) {
+  if ( (subjects.length -1) != currentSubject) {
     //stop
-    checkQuestion();
-    // currentSubject--;
-  } else {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
     agree.style.backgroundColor = "rgb(44, 218, 44)";
     disagree.style.backgroundColor = "red";
     neither.style.backgroundColor = "honeydew";
+   
+    // currentSubject--;
+  } else {
+    checkQuestion();
   }
   console.log(currentSubject);
 });
@@ -72,54 +71,15 @@ previous.addEventListener ("click", function() {
 });
 
 agree.addEventListener ("click", function() {
-  fillChoice("pro");
-  if ( (subjects.length -1) == currentSubject) {
-    //no entry
-    checkQuestion();
-    currentSubject--;
-  } else {
-    currentSubject++;
-    titel.innerHTML = subjects[currentSubject].title;
-    statement.innerHTML = subjects[currentSubject].statement;
-    agree.style.backgroundColor = "rgb(44, 218, 44)";
-    disagree.style.backgroundColor = "red";
-    neither.style.backgroundColor = "honeydew";
-  }
-  console.log(currentSubject);
+  setAnswer("pro");
 });
 
 neither.addEventListener ("click", function() {
-  fillChoice("none");
-  if ( (subjects.length -1) == currentSubject) {
-    //no further
-    checkQuestion();
-    currentSubject--;
-  } else {
-    currentSubject++;
-    titel.innerHTML = subjects[currentSubject].title;
-    statement.innerHTML = subjects[currentSubject].statement;
-    agree.style.backgroundColor = "rgb(44, 218, 44)";
-    disagree.style.backgroundColor = "red";
-    neither.style.backgroundColor = "honeydew";
-  }
-  console.log(currentSubject);
+  setAnswer("none");
 });
 
 disagree.addEventListener ("click", function() {
-  fillChoice("contra");
-  if ( (subjects.length -1) == currentSubject) {
-    //you shall not pass
-    checkQuestion();
-    currentSubject--;
-  } else {
-    currentSubject++;
-    titel.innerHTML = subjects[currentSubject].title;
-    statement.innerHTML = subjects[currentSubject].statement;
-    agree.style.backgroundColor = "rgb(44, 218, 44)";
-    disagree.style.backgroundColor = "red";
-    neither.style.backgroundColor = "honeydew";
-  }
-  console.log(currentSubject);
+  setAnswer("contra");
 });
 
 function fillChoice(insert) {
@@ -148,28 +108,23 @@ function checkQuestion() {
     alert(counter);
   } else {
 
-    for (var g = 0; g < parties.length; g++) {
-      partijPunten.push({name: parties[g].name, points: 0});
-    }
-
      for (var k = 0; k < choices.length; k++) {
       for (var l = 0; l < subjects[k].parties.length; l++) {  
         //probeer eens nou die vragen gewicht te geven, misschien kan je tenminste iets doen
         
-
        if (choices[k] == subjects[k].parties[l].position) {   
         //pro, contra, none
-        for (var p = 0; p < partijPunten.length; p++) {
-          if (partijPunten[p].name == subjects[k].parties[l].name) {
+        for (var p = 0; p < choicePoints.length; p++) {
+          if (choicePoints[p].name == subjects[k].parties[l].name) {
             if (choices[k] == "pro") {
-              partijPunten[p].points++;
-              console.log(partijPunten);
+              choicePoints[p].points++;
+              console.log(choicePoints);
             } else if (choices[k] == "none") {
-              partijPunten[p].points++;
-              console.log(partijPunten);
+              choicePoints[p].points++;
+              console.log(choicePoints);
             } else if (choices[k] == "contra") {
-              partijPunten[p].points++;
-              console.log(partijPunten);
+              choicePoints[p].points++;
+              console.log(choicePoints);
             }
           }
         }
@@ -182,6 +137,9 @@ function checkQuestion() {
 }
 
 function displayImportant() {
+  for (var g = 0; g < parties.length; g++) {
+    choicePoints.push({name: parties[g].name, points: 0});
+  }
   //per stelling blok maken met een vinkje en een stelling titel aan container
   //hoe maak ik element in een bestaand element
   for (i = 0; i < subjects.length; i++) {
@@ -199,9 +157,26 @@ function displayImportant() {
   }
 }
 
+function setAnswer(answer) {
+  fillChoice(answer);
+  if ( (subjects.length -1) != currentSubject) {
+    //no entry
+    currentSubject++;
+    titel.innerHTML = subjects[currentSubject].title;
+    statement.innerHTML = subjects[currentSubject].statement;
+    agree.style.backgroundColor = "rgb(44, 218, 44)";
+    disagree.style.backgroundColor = "red";
+    neither.style.backgroundColor = "honeydew";
+  } else {
+    checkQuestion();
+  }
+  console.log(currentSubject);
+}
 
-var partijPunten = [];
+var choicePoints = [];
 
 var choices = []; 
+
+displayImportant();
 
 //if array in array do array[0].array1[0].name

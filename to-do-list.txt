@@ -1,5 +1,5 @@
 list to do:
-change to english
+change to english - DONE
 make stuff easier to understand
 exceptions at end
 change the important to above(afhandeling onderaan)
