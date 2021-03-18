@@ -150,7 +150,7 @@ function displayImportant() {
     var input = document.createElement("input");
     input.setAttribute("type", "checkbox");
     input.myId = i;
-    input.setAttribute("id", "input-" + i.toString())
+    input.setAttribute("id", i.toString())
     li.appendChild(input);
     label.innerHTML = subjects[i].title;
     document.getElementById("important").appendChild(li);

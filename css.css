@@ -42,7 +42,7 @@ html {
     border-radius: 5px;
 }
 
-#container {
+.container {
     text-align: center;
     background-color:white;
     margin: 0rem, 5rem, 5rem, 5rem;
