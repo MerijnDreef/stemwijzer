@@ -128,12 +128,10 @@ function checkQuestion() {
             }
           }
         }
-       }
-        
+       }     
       }
      }
   }
-
 }
 
 function displayImportant() {
@@ -150,7 +148,7 @@ function displayImportant() {
     var input = document.createElement("input");
     input.setAttribute("type", "checkbox");
     input.myId = i;
-    input.setAttribute("id", i.toString())
+    input.setAttribute("id", i.toString());
     li.appendChild(input);
     label.innerHTML = subjects[i].title;
     document.getElementById("important").appendChild(li);
@@ -171,6 +169,21 @@ function setAnswer(answer) {
     checkQuestion();
   }
   console.log(currentSubject);
+}
+
+function checkboxCheck(checkbox, id) {
+ if (checkbox.checked == true){
+   var place = parseInt(id, 10); //to get Id to integer then +1 the stuff that have same answer as user
+   for (y = 0; y < subjects[place].parties.length; y++) {
+      for(l = 0; l < choicePoints.length; l++) {
+        if (choices[place] == subjects[place].parties[y].position) {
+          choicePoints[l].points++;
+        }
+      }
+   }
+ } else{
+//  don't add number, if numbers keep being added, do -1(only if necessary)
+ }
 }
 
 var choicePoints = [];
