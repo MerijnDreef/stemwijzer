@@ -173,7 +173,7 @@ function setAnswer(answer) {
 
 function checkboxCheck(checkbox, id) {
  if (checkbox.checked == true){
-   var place = parseInt(id, 10); //to get Id to integer then +1 the stuff that have same answer as user
+   var place = parseInt(id, 10); //to convert Id to integer then +1 the stuff that have same answer as user
    for (y = 0; y < subjects[place].parties.length; y++) {
       for(l = 0; l < choicePoints.length; l++) {
         if (choices[place] == subjects[place].parties[y].position) {
