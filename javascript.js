@@ -173,7 +173,7 @@ function setAnswer(answer) {
 
 function checkboxCheck(checkbox, id) {
  if (checkbox.checked == true){
-   var place = parseInt(id, 10); //to convert Id to integer then +1 the stuff that have same answer as user
+   var place = parseInt(id, 10); //to convert Id to integer then +1 the stuff that have same answer as user (this will happen after the submit)
    for (y = 0; y < subjects[place].parties.length; y++) {
       for(l = 0; l < choicePoints.length; l++) {
         if (choices[place] == subjects[place].parties[y].position) {
@@ -182,7 +182,7 @@ function checkboxCheck(checkbox, id) {
       }
    }
  } else{
-//  don't add number, if numbers keep being added, do -1(only if necessary)
+//  probably going to remove this part, I think there is no use here (I'm talking about the else)
  }
 }
 
