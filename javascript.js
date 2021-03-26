@@ -148,12 +148,17 @@ function displayImportant() {
     var input = document.createElement("input");
     input.setAttribute("type", "checkbox");
     input.myId = i;
+    input.addEventListener ("click", function(){
+      this.classList.toggle("checked");
+    });
     input.setAttribute("id", i.toString());
     li.appendChild(input);
     label.innerHTML = subjects[i].title;
     document.getElementById("important").appendChild(li);
   }
 }
+
+
 
 function setAnswer(answer) {
   fillChoice(answer);
@@ -171,25 +176,47 @@ function setAnswer(answer) {
   console.log(currentSubject);
 }
 
-function checkboxCheck(checkbox, id) {
- if (checkbox.checked == true){
-   var place = parseInt(id, 10); //to convert Id to integer then +1 the stuff that have same answer as user (this will happen after the submit)
-   for (y = 0; y < subjects[place].parties.length; y++) {
-      for(l = 0; l < choicePoints.length; l++) {
-        if (choices[place] == subjects[place].parties[y].position) {
-          choicePoints[l].points++;
-        }
+function checkboxCheck() {
+  submit = document.getElementById("form1");
+  submit.onsubmit = function(e) {
+    e.preventDefault();
+    for (f = 0; f < checkboxes.length; f++){
+      if (checkboxes[f].className == "checked"){
+        id = checkboxes[f].id;
+        var place = parseInt(id, 10);
+        questImportant[f] = place;
+        console.log(place);
+        console.log(questImportant);
       }
-   }
- } else{
-//  probably going to remove this part, I think there is no use here (I'm talking about the else)
- }
+    } 
+  };
+
+//  if (checkbox.checked == true){
+//    var place = parseInt(id, 10); //to convert Id to integer then +1 the stuff that have same answer as user (this will happen after the submit)
+//    for (y = 0; y < subjects[place].parties.length; y++) {
+//       for(l = 0; l < choicePoints.length; l++) {
+//         if (choices[place] == subjects[place].parties[y].position) {
+//           choicePoints[l].points++;
+//         }
+//       }
+//    }
+//  } else{
+// //  probably going to remove this part, I think there is no use here (I'm talking about the else)
+//  }
 }
 
 var choicePoints = [];
 
 var choices = []; 
 
+var questImportant = [];
+
 displayImportant();
+
+var checkboxes = document.querySelectorAll("#important input");
+console.log(checkboxes);
+
+
+checkboxCheck();
 
 //if array in array do array[0].array1[0].name
