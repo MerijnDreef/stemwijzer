@@ -187,6 +187,7 @@ function checkboxCheck() {
         questImportant[f] = place;
         console.log(place);
         console.log(questImportant);
+        // what I need to do is find a way to give extra points to the right parties, the question is where I should put this code, still unsure probably not here
       }
     } 
   };
