@@ -126,6 +126,9 @@ function checkQuestion() {
               choicePoints[p].points++;
               console.log(choicePoints);
             }
+            //perhaps an if (questImportant == integer) {
+            //  give points to the right parties
+            //}
           }
         }
        }     
