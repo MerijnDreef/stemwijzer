@@ -10,6 +10,8 @@ const statement = document.getElementById("uitspraak");
 const skip = document.getElementById("overslaan");
 const previous = document.getElementById("vorige");
 const container = document.getElementById("container");
+const submitPrevious = document.getElementById("submitVorige");
+const submit = document.getElementById("form1");
 
 start.addEventListener ("click", function() {
     show(container);
@@ -116,19 +118,18 @@ function checkQuestion() {
         //pro, contra, none
         for (var p = 0; p < choicePoints.length; p++) {
           if (choicePoints[p].name == subjects[k].parties[l].name) {
-            if (choices[k] == "pro") {
+            if (choices[k] != "") {
               choicePoints[p].points++;
               console.log(choicePoints);
-            } else if (choices[k] == "none") {
+              if (questImportant[k] != NaN) {
+              // give points to the right parties
               choicePoints[p].points++;
-              console.log(choicePoints);
-            } else if (choices[k] == "contra") {
-              choicePoints[p].points++;
-              console.log(choicePoints);
-            }
-            //perhaps an if (questImportant == integer) {
-            //  give points to the right parties
-            //}
+              }
+            } 
+            // if (questImportant[k] == integer) {
+            // give points to the right parties
+            // }
+            console.log(choicePoints);
           }
         }
        }     
@@ -161,7 +162,10 @@ function displayImportant() {
   }
 }
 
-
+submitPrevious.addEventListener ("click", function() {
+  hide(submit);
+  show(container);
+});
 
 function setAnswer(answer) {
   fillChoice(answer);
@@ -174,13 +178,14 @@ function setAnswer(answer) {
     disagree.style.backgroundColor = "red";
     neither.style.backgroundColor = "honeydew";
   } else {
-    checkQuestion();
+    // checkQuestion();
+    show(submit);
+    hide(container);
   }
   console.log(currentSubject);
 }
 
 function checkboxCheck() {
-  submit = document.getElementById("form1");
   submit.onsubmit = function(e) {
     e.preventDefault();
     for (f = 0; f < checkboxes.length; f++){
@@ -193,6 +198,7 @@ function checkboxCheck() {
         // what I need to do is find a way to give extra points to the right parties, the question is where I should put this code, still unsure probably not here
       }
     } 
+    checkQuestion();
   };
 
 //  if (checkbox.checked == true){

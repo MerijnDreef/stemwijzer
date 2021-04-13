@@ -6,3 +6,5 @@ change the important to above(afhandeling onderaan)
 no styling in code, styling in css
 too much dry fix that
 if the code gets confusing make comments
+
+style aansturen met classes (classlist.add.remove)
