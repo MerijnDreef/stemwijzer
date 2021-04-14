@@ -28,9 +28,7 @@ skip.addEventListener ("click", function() {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    agree.style.backgroundColor = "rgb(44, 218, 44)";
-    disagree.style.backgroundColor = "red";
-    neither.style.backgroundColor = "honeydew";
+    answerBackground();
    
     // currentSubject--;
   } else {
@@ -51,23 +49,7 @@ previous.addEventListener ("click", function() {
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
 
-      if (choices[currentSubject] == "pro") {
-        agree.style.backgroundColor = "blue";
-        disagree.style.backgroundColor = "red";
-        neither.style.backgroundColor = "honeydew";
-      } else if (choices[currentSubject] == "contra") {
-        disagree.style.backgroundColor = "blue";
-        agree.style.backgroundColor = "rgb(44, 218, 44)";
-        neither.style.backgroundColor = "honeydew";
-      } else if (choices[currentSubject] == "none") {
-        neither.style.backgroundColor = "blue";
-        disagree.style.backgroundColor = "red";
-        agree.style.backgroundColor = "rgb(44, 218, 44)";
-      } else {
-        eens.style.backgroundColor = "rgb(44, 218, 44)";
-        disagree.style.backgroundColor = "red";
-        neither.style.backgroundColor = "honeydew";
-      }
+    answerBackground();
   }
   console.log(currentSubject);
 });
@@ -174,15 +156,35 @@ function setAnswer(answer) {
     currentSubject++;
     titel.innerHTML = subjects[currentSubject].title;
     statement.innerHTML = subjects[currentSubject].statement;
-    agree.style.backgroundColor = "rgb(44, 218, 44)";
-    disagree.style.backgroundColor = "red";
-    neither.style.backgroundColor = "honeydew";
+    answerBackground();
   } else {
     // checkQuestion();
     show(submit);
     hide(container);
   }
   console.log(currentSubject);
+}
+/*
+* sets background for agree, disagree and neither but also removes background if nothing is chosen (apart from skip that doesn't count)
+*/
+function answerBackground() {
+  if (choices[currentSubject] == "pro") {
+    agree.classList.add("chosen");
+    disagree.classList.remove("chosen");
+    neither.classList.remove("chosen");
+  } else if (choices[currentSubject] == "contra") {
+    disagree.classList.add("chosen");
+    agree.classList.remove("chosen");
+    neither.classList.remove("chosen");
+  } else if (choices[currentSubject] == "none") {
+    neither.classList.add("chosen");
+    agree.classList.remove("chosen");
+    disagree.classList.remove("chosen");
+  } else {
+    agree.classList.remove("chosen");
+    disagree.classList.remove("chosen");
+    neither.classList.remove("chosen");
+  }
 }
 
 function checkboxCheck() {
