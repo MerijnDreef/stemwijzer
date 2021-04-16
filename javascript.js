@@ -122,7 +122,7 @@ function checkQuestion() {
 
 function displayImportant() {
   for (var g = 0; g < parties.length; g++) {
-    choicePoints.push({name: parties[g].name, points: 0});
+    choicePoints.push({name: parties[g].name, points: 0, secular: parties[g].secular, size: parties[g].size});
   }
   //per stelling blok maken met een vinkje en een stelling titel aan container
   //hoe maak ik element in een bestaand element
@@ -133,7 +133,7 @@ function displayImportant() {
     li.appendChild(label);
     var input = document.createElement("input");
     input.setAttribute("type", "checkbox");
-    input.myId = i;
+    // input.myId = i;
     input.addEventListener ("click", function(){
       this.classList.toggle("checked");
     });
@@ -141,6 +141,69 @@ function displayImportant() {
     li.appendChild(input);
     label.innerHTML = subjects[i].title;
     document.getElementById("important").appendChild(li);
+  }
+}
+
+function displayParties() {
+  // this is for secular
+  var secularLabel = document.createElement("label");
+  var secularLi = document.createElement("li");
+  secularLi.appendChild(secularLabel);
+  var secularInput = document.createElement("input");
+  secularInput.setAttribute("type", "checkbox");
+  secularLabel.innerHTML = "seculiere partijen";
+  secularInput.addEventListener ("click", function(){
+    var secularParties = document.getElementsByClassName("secular");
+    console.log(secularParties);
+    for (j = 0; j < secularParties.length; j++) {
+      secularParties[j].checked = true
+    }
+  });
+  secularLi.appendChild(secularInput);
+  document.getElementById("manyCheck").appendChild(secularLi);
+
+  // this is for big
+  var bigLabel = document.createElement("label");
+  var bigLi = document.createElement("li");
+  bigLi.appendChild(bigLabel);
+  var bigInput = document.createElement("input");
+  bigInput.setAttribute("type", "checkbox");
+  bigLabel.innerHTML = "grote partijen";
+  bigInput.addEventListener ("click", function(){
+    var bigParties = document.getElementsByClassName("big");
+    console.log(bigParties);
+    for (j = 0; j < bigParties.length; j++) {
+      bigParties[j].checked = true
+    }
+  });
+  bigLi.appendChild(bigInput);
+  document.getElementById("manyCheck").appendChild(bigLi);
+
+  // this is to make the parties checkbox
+  for (i = 0; i < choicePoints.length; i++) {
+    console.log(parties[i].name);
+    var label = document.createElement("label");
+    var li = document.createElement("li");
+    li.appendChild(label);
+    var input = document.createElement("input");
+    input.setAttribute("type", "checkbox");
+    if (choicePoints[i].secular == true && choicePoints[i].size >= 10) {
+      // input.myId = "secular big";
+      input.setAttribute("class", "secular big");
+    } else if (choicePoints[i].size >= 10) {
+      // input.myId = "big";
+      input.setAttribute("class", "big");
+    } else if (choicePoints[i].secular == true) {
+      // input.myId = "secular";
+      input.setAttribute("class", "secular");
+    }
+    input.addEventListener ("click", function(){
+      this.classList.toggle("checked");
+    });
+    // input.setAttribute("id", i.toString());
+    li.appendChild(input);
+    label.innerHTML = choicePoints[i].name;
+    document.getElementById("allParties").appendChild(li);
   }
 }
 
@@ -164,6 +227,7 @@ function setAnswer(answer) {
   }
   console.log(currentSubject);
 }
+
 /*
 * sets background for agree, disagree and neither but also removes background if nothing is chosen (apart from skip that doesn't count)
 */
@@ -202,20 +266,9 @@ function checkboxCheck() {
     } 
     checkQuestion();
   };
-
-//  if (checkbox.checked == true){
-//    var place = parseInt(id, 10); //to convert Id to integer then +1 the stuff that have same answer as user (this will happen after the submit)
-//    for (y = 0; y < subjects[place].parties.length; y++) {
-//       for(l = 0; l < choicePoints.length; l++) {
-//         if (choices[place] == subjects[place].parties[y].position) {
-//           choicePoints[l].points++;
-//         }
-//       }
-//    }
-//  } else{
-// //  probably going to remove this part, I think there is no use here (I'm talking about the else)
-//  }
 }
+
+//after important question get checkboxes that when checked they will show the parties at the result, if secular and/or big check everything that involves it
 
 var choicePoints = [];
 
@@ -231,4 +284,7 @@ console.log(checkboxes);
 
 checkboxCheck();
 
+displayParties();
+
 //if array in array do array[0].array1[0].name
+// document.getElementsByClassName("secular")[0].checked = true
