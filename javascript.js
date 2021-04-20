@@ -12,6 +12,7 @@ const previous = document.getElementById("vorige");
 const container = document.getElementById("container");
 const submitPrevious = document.getElementById("submitVorige");
 const submit = document.getElementById("form1");
+const partySubmit = document.getElementById("form2");
 
 start.addEventListener ("click", function() {
     show(container);
@@ -251,11 +252,11 @@ function answerBackground() {
   }
 }
 
-function checkboxCheck() {
+function checkCheckboxImportant() {
   submit.onsubmit = function(e) {
     e.preventDefault();
-    for (f = 0; f < checkboxes.length; f++){
-      if (checkboxes[f].className == "checked"){
+    for (f = 0; f < checkboxes.length; f++) {
+      if (checkboxes[f].className == "checked") {
         id = checkboxes[f].id;
         var place = parseInt(id, 10);
         questImportant[f] = place;
@@ -265,6 +266,17 @@ function checkboxCheck() {
       }
     } 
     checkQuestion();
+  };
+}
+function checkCheckboxParty() {
+  partySubmit.onsubmit = function(e) {
+    e.preventDefault();
+    for (f = 0; f < choicePoints.length; f++){
+      if (checkboxes[f].classname == "checked") {
+      //  you could do it with true or false in array
+      }
+    } 
+   
   };
 }
 
@@ -282,7 +294,7 @@ var checkboxes = document.querySelectorAll("#important input");
 console.log(checkboxes);
 
 
-checkboxCheck();
+checkCheckboxImportant();
 
 displayParties();
 
