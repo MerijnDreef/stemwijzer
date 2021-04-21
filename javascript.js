@@ -121,6 +121,16 @@ function checkQuestion() {
   }
 }
 
+function displayResult() {
+  for (var o = 0; o < choicePoints.length; o++) {
+    if (chosenParties[o] == false) {
+      choicePoints.splice(o, 1);
+      // remove the party
+    }
+    console.log(choicePoints);
+  }
+}
+
 function displayImportant() {
   for (var g = 0; g < parties.length; g++) {
     choicePoints.push({name: parties[g].name, points: 0, secular: parties[g].secular, size: parties[g].size});
@@ -134,10 +144,6 @@ function displayImportant() {
     li.appendChild(label);
     var input = document.createElement("input");
     input.setAttribute("type", "checkbox");
-    // input.myId = i;
-    input.addEventListener ("click", function(){
-      this.classList.toggle("checked");
-    });
     input.setAttribute("id", i.toString());
     li.appendChild(input);
     label.innerHTML = subjects[i].title;
@@ -198,9 +204,6 @@ function displayParties() {
       // input.myId = "secular";
       input.setAttribute("class", "secular");
     }
-    input.addEventListener ("click", function(){
-      this.classList.toggle("checked");
-    });
     // input.setAttribute("id", i.toString());
     li.appendChild(input);
     label.innerHTML = choicePoints[i].name;
@@ -256,7 +259,7 @@ function checkCheckboxImportant() {
   submit.onsubmit = function(e) {
     e.preventDefault();
     for (f = 0; f < checkboxes.length; f++) {
-      if (checkboxes[f].className == "checked") {
+      if (checkboxes[f].checked == true) {
         id = checkboxes[f].id;
         var place = parseInt(id, 10);
         questImportant[f] = place;
@@ -272,15 +275,20 @@ function checkCheckboxParty() {
   partySubmit.onsubmit = function(e) {
     e.preventDefault();
     for (f = 0; f < choicePoints.length; f++){
-      if (checkboxes[f].classname == "checked") {
+      if (partyCheckboxes[f].checked == true) {
+        chosenParties[f] = true;
+        console.log(chosenParties);
       //  you could do it with true or false in array
+      } else {
+        chosenParties[f] = false;
+        console.log(chosenParties);
       }
     } 
-   
+   displayResult();
   };
 }
 
-//after important question get checkboxes that when checked they will show the parties at the result, if secular and/or big check everything that involves it
+//after the parties are chosen I need to display them from most points to least points
 
 var choicePoints = [];
 
@@ -288,15 +296,22 @@ var choices = [];
 
 var questImportant = [];
 
+var chosenParties = [];
+
 displayImportant();
 
 var checkboxes = document.querySelectorAll("#important input");
 console.log(checkboxes);
 
-
 checkCheckboxImportant();
 
 displayParties();
+
+var partyCheckboxes = document.querySelectorAll("#allParties input");
+console.log(partyCheckboxes);
+
+checkCheckboxParty();
+
 
 //if array in array do array[0].array1[0].name
 // document.getElementsByClassName("secular")[0].checked = true
