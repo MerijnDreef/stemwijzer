@@ -13,6 +13,7 @@ const container = document.getElementById("container");
 const submitPrevious = document.getElementById("submitVorige");
 const submit = document.getElementById("form1");
 const partySubmit = document.getElementById("form2");
+const resultParties = document.getElementById("resultParties");
 
 start.addEventListener ("click", function() {
     show(container);
@@ -127,8 +128,16 @@ function displayResult() {
       choicePoints.splice(o, 1);
       // remove the party
     }
-    console.log(choicePoints);
   }
+  console.log(choicePoints);
+
+  choicePoints.sort((a, b) => b.points - a.points);
+
+    for (var i = 0; i < choicePoints.length; i++) {
+      var li = document.createElement("li");
+      li.innerHTML = choicePoints[i].name + ": " + choicePoints[i].points;
+      document.getElementById("resultParties").appendChild(li);
+    }
 }
 
 function displayImportant() {
@@ -268,6 +277,8 @@ function checkCheckboxImportant() {
         // what I need to do is find a way to give extra points to the right parties, the question is where I should put this code, still unsure probably not here
       }
     } 
+    hide(submit);
+    show(partySubmit);
     checkQuestion();
   };
 }
@@ -284,6 +295,8 @@ function checkCheckboxParty() {
         console.log(chosenParties);
       }
     } 
+    hide(partySubmit);
+    show(resultParties);
    displayResult();
   };
 }
