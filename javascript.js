@@ -15,6 +15,9 @@ const submit = document.getElementById("form1");
 const partySubmit = document.getElementById("form2");
 const resultParties = document.getElementById("resultParties");
 
+/*
+* this is to start the whole thing
+*/
 start.addEventListener ("click", function() {
     show(container);
     titel.innerHTML = subjects[currentSubject].title;
@@ -22,6 +25,9 @@ start.addEventListener ("click", function() {
     hide(startContainer);
   });
 
+/*
+* this is to skip questions
+*/
 skip.addEventListener ("click", function() {
   fillChoice("");
   console.log(subjects);
@@ -39,6 +45,9 @@ skip.addEventListener ("click", function() {
   console.log(currentSubject);
 });
 
+/*
+* this is to go to the previous question but also to the starting screen
+*/
 previous.addEventListener ("click", function() {
   if (currentSubject == 0){
     //don't  
@@ -56,37 +65,56 @@ previous.addEventListener ("click", function() {
   console.log(currentSubject);
 });
 
+/*
+* this is to agree
+*/
 agree.addEventListener ("click", function() {
   setAnswer("pro");
 });
 
+/*
+* this is to be neutral
+*/
 neither.addEventListener ("click", function() {
   setAnswer("none");
 });
 
+/*
+* this is to disagree
+*/
 disagree.addEventListener ("click", function() {
   setAnswer("contra");
 });
 
+/*
+* this is to add you answer to the array
+*/
 function fillChoice(insert) {
   choices[currentSubject] = insert;
   console.log(choices);
 }
 
+/*
+* makes things visible
+*/
 function show(element) {
   element.classList.remove("hidden");
 }
 
+/*
+* makes things invisible
+*/
 function hide(element) {
   element.classList.add("hidden");
 }
 
+/*
+* this is to add points to the right parties who have the same answers but also which important questions you chose
+*/
 function checkQuestion() {
-  //checked of vragen niet beantwoord zijn
   var counter = 0;
   for (var i = 0; i < subjects.length; i++){
     if (choices[i] === "") {
-      //effe tellen
       counter++;
     }
   }
@@ -96,23 +124,16 @@ function checkQuestion() {
 
      for (var k = 0; k < choices.length; k++) {
       for (var l = 0; l < subjects[k].parties.length; l++) {  
-        //probeer eens nou die vragen gewicht te geven, misschien kan je tenminste iets doen
-        
        if (choices[k] == subjects[k].parties[l].position) {   
-        //pro, contra, none
         for (var p = 0; p < choicePoints.length; p++) {
           if (choicePoints[p].name == subjects[k].parties[l].name) {
             if (choices[k] != "") {
               choicePoints[p].points++;
               console.log(choicePoints);
               if (questImportant[k] != NaN) {
-              // give points to the right parties
               choicePoints[p].points++;
               }
             } 
-            // if (questImportant[k] == integer) {
-            // give points to the right parties
-            // }
             console.log(choicePoints);
           }
         }
@@ -122,6 +143,9 @@ function checkQuestion() {
   }
 }
 
+/*
+* this is to show at the end which party is the closest to your own answers
+*/
 function displayResult() {
   for (var o = 0; o < choicePoints.length; o++) {
     if (chosenParties[o] == false) {
@@ -140,41 +164,51 @@ function displayResult() {
     }
 }
 
+/*
+* this is to make the checkboxes for the important questions
+*/
 function displayImportant() {
   for (var g = 0; g < parties.length; g++) {
     choicePoints.push({name: parties[g].name, points: 0, secular: parties[g].secular, size: parties[g].size});
   }
-  //per stelling blok maken met een vinkje en een stelling titel aan container
-  //hoe maak ik element in een bestaand element
+
   for (i = 0; i < subjects.length; i++) {
     console.log(subjects[i].title);
     var label = document.createElement("label");
     var li = document.createElement("li");
     li.appendChild(label);
+
     var input = document.createElement("input");
     input.setAttribute("type", "checkbox");
     input.setAttribute("id", i.toString());
     li.appendChild(input);
+
     label.innerHTML = subjects[i].title;
     document.getElementById("important").appendChild(li);
   }
 }
 
+/*
+* this is to make the checkboxes for the parties but also to make the checkboxes that can check multiple checkboxes
+*/
 function displayParties() {
   // this is for secular
   var secularLabel = document.createElement("label");
   var secularLi = document.createElement("li");
   secularLi.appendChild(secularLabel);
+
   var secularInput = document.createElement("input");
   secularInput.setAttribute("type", "checkbox");
   secularLabel.innerHTML = "seculiere partijen";
+
   secularInput.addEventListener ("click", function(){
     var secularParties = document.getElementsByClassName("secular");
     console.log(secularParties);
-    for (j = 0; j < secularParties.length; j++) {
-      secularParties[j].checked = true
-    }
+      for (j = 0; j < secularParties.length; j++) {
+        secularParties[j].checked = true
+      }
   });
+
   secularLi.appendChild(secularInput);
   document.getElementById("manyCheck").appendChild(secularLi);
 
@@ -182,16 +216,19 @@ function displayParties() {
   var bigLabel = document.createElement("label");
   var bigLi = document.createElement("li");
   bigLi.appendChild(bigLabel);
+
   var bigInput = document.createElement("input");
   bigInput.setAttribute("type", "checkbox");
   bigLabel.innerHTML = "grote partijen";
+
   bigInput.addEventListener ("click", function(){
     var bigParties = document.getElementsByClassName("big");
     console.log(bigParties);
-    for (j = 0; j < bigParties.length; j++) {
-      bigParties[j].checked = true
-    }
+      for (j = 0; j < bigParties.length; j++) {
+        bigParties[j].checked = true
+      }
   });
+
   bigLi.appendChild(bigInput);
   document.getElementById("manyCheck").appendChild(bigLi);
 
@@ -201,30 +238,36 @@ function displayParties() {
     var label = document.createElement("label");
     var li = document.createElement("li");
     li.appendChild(label);
+
     var input = document.createElement("input");
     input.setAttribute("type", "checkbox");
+
     if (choicePoints[i].secular == true && choicePoints[i].size >= 10) {
-      // input.myId = "secular big";
       input.setAttribute("class", "secular big");
     } else if (choicePoints[i].size >= 10) {
-      // input.myId = "big";
       input.setAttribute("class", "big");
     } else if (choicePoints[i].secular == true) {
-      // input.myId = "secular";
       input.setAttribute("class", "secular");
     }
-    // input.setAttribute("id", i.toString());
+
     li.appendChild(input);
     label.innerHTML = choicePoints[i].name;
     document.getElementById("allParties").appendChild(li);
   }
 }
 
+/*
+* this is to hide the first checkbox, so you won't see overlapping stuff
+*/
 submitPrevious.addEventListener ("click", function() {
   hide(submit);
   show(container);
 });
 
+/*
+* here everytime you click agree, disagree or neither it will go to the next question but if the end is reached it will show the important questions
+* also might be a bit confusing but the fillchoice actually fills the array and this function just changes the question
+*/
 function setAnswer(answer) {
   fillChoice(answer);
   if ( (subjects.length -1) != currentSubject) {
@@ -264,6 +307,9 @@ function answerBackground() {
   }
 }
 
+/*
+* this gives the array a number which is basicly useless and could be better, but it sends it to checkQuestion so it can be used right
+*/
 function checkCheckboxImportant() {
   submit.onsubmit = function(e) {
     e.preventDefault();
@@ -274,7 +320,6 @@ function checkCheckboxImportant() {
         questImportant[f] = place;
         console.log(place);
         console.log(questImportant);
-        // what I need to do is find a way to give extra points to the right parties, the question is where I should put this code, still unsure probably not here
       }
     } 
     hide(submit);
@@ -282,6 +327,10 @@ function checkCheckboxImportant() {
     checkQuestion();
   };
 }
+
+/*
+* this gives the array a boolean so that the displayResult can display it right
+*/
 function checkCheckboxParty() {
   partySubmit.onsubmit = function(e) {
     e.preventDefault();
@@ -289,7 +338,6 @@ function checkCheckboxParty() {
       if (partyCheckboxes[f].checked == true) {
         chosenParties[f] = true;
         console.log(chosenParties);
-      //  you could do it with true or false in array
       } else {
         chosenParties[f] = false;
         console.log(chosenParties);
