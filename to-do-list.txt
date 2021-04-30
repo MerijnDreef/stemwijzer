@@ -1,10 +1,10 @@
 list to do:
 change to english - DONE
-make stuff easier to understand
-exceptions at end
-change the important to above(afhandeling onderaan)
-no styling in code, styling in css
-too much dry fix that
-if the code gets confusing make comments
+make stuff easier to understand - DONE
+exceptions at end - DONE
+change the important to above(afhandeling onderaan) - DONE
+no styling in code, styling in css - DONE
+too much dry fix that - DONE
+if the code gets confusing make comments - DONE
 
 style aansturen met classes (classlist.add.remove)

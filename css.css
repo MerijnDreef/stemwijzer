@@ -10,15 +10,15 @@ html {
     background-size: cover;
 }
 
-.eens {
+.agree {
     background-color:rgb(44, 218, 44);
 }
 
-.gvb {
+.neither {
     background-color:honeydew;
 }
 
-.oneens {
+.disagree {
     background-color:red;
 }
 
