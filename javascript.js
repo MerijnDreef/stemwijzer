@@ -1,14 +1,14 @@
 let currentSubject = 0;
 
 const startContainer = document.getElementById("startContainer");
-const start = document.getElementById("start");
-const agree = document.getElementById("agree");
-const neither = document.getElementById("neither");
-const disagree = document.getElementById("disagree");
+const startButton = document.getElementById("start");
+const agreeButton = document.getElementById("agree");
+const neitherButton = document.getElementById("neither");
+const disagreeButton = document.getElementById("disagree");
 const titel = document.getElementById("title");
 const statement = document.getElementById("statement");
-const skip = document.getElementById("skip");
-const previous = document.getElementById("previous");
+const skipButton = document.getElementById("skip");
+const previousButton = document.getElementById("previous");
 const container = document.getElementById("container");
 const submitPrevious = document.getElementById("submitPrevious");
 const submit = document.getElementById("form1");
@@ -18,45 +18,47 @@ const resultParties = document.getElementById("resultParties");
 /*
 * this is to start the whole thing
 */
-start.addEventListener ("click", function() {
+startButton.addEventListener ("click", function() {
     show(container);
-    titel.innerHTML = subjects[currentSubject].title;
-    statement.innerHTML = subjects[currentSubject].statement;
+    showSubject();
     hide(startContainer);
   });
+
+  /*
+  * this is to set the title and the statement for the questions
+  */
+function showSubject() {
+  titel.innerHTML = subjects[currentSubject].title;
+  statement.innerHTML = subjects[currentSubject].statement;
+}
 
 /*
 * this is to skip questions
 */
-skip.addEventListener ("click", function() {
+skipButton.addEventListener ("click", function() {
   fillChoice("");
-  if ( (subjects.length -1) != currentSubject) {
+  if (currentSubject != (subjects.length -1)) {
     //stop
     currentSubject++;
-    titel.innerHTML = subjects[currentSubject].title;
-    statement.innerHTML = subjects[currentSubject].statement;
+    showSubject();
     answerBackground();
-   
-    // currentSubject--;
   } else {
-    checkQuestion();
+    pointCounting();
   }
 });
 
 /*
 * this is to go to the previous question but also to the starting screen
 */
-previous.addEventListener ("click", function() {
+previousButton.addEventListener ("click", function() {
   if (currentSubject == 0){
     //don't  
     hide(container);
-    titel.innerHTML = subjects[currentSubject].title;
-    statement.innerHTML = subjects[currentSubject].statement;
+    showSubject();
     show(startContainer);
   } else {
     currentSubject--;
-    titel.innerHTML = subjects[currentSubject].title;
-    statement.innerHTML = subjects[currentSubject].statement;
+    showSubject();
 
     answerBackground();
   }
@@ -65,21 +67,21 @@ previous.addEventListener ("click", function() {
 /*
 * this is to agree
 */
-agree.addEventListener ("click", function() {
+agreeButton.addEventListener ("click", function() {
   setAnswer("pro");
 });
 
 /*
 * this is to be neutral
 */
-neither.addEventListener ("click", function() {
+neitherButton.addEventListener ("click", function() {
   setAnswer("none");
 });
 
 /*
 * this is to disagree
 */
-disagree.addEventListener ("click", function() {
+disagreeButton.addEventListener ("click", function() {
   setAnswer("contra");
 });
 
@@ -105,9 +107,9 @@ function hide(element) {
 }
 
 /*
-* this is to add points to the right parties who have the same answers but also which important questions you chose
+* this is to add points to the right parties who have the same answers as the user but also which important questions the user chose
 */
-function checkQuestion() {
+function pointCounting() {
   for (var k = 0; k < choices.length; k++) {
     for (var l = 0; l < subjects[k].parties.length; l++) {  
       if (choices[k] == subjects[k].parties[l].position) {   
@@ -115,7 +117,7 @@ function checkQuestion() {
           if (choicePoints[p].name == subjects[k].parties[l].name) {
             if (choices[k] != "") {
               choicePoints[p].points++;
-                if (questImportant[k] == true) {
+                if (questImportant[k]) {
                   choicePoints[p].points++;
                 }
             } 
@@ -244,11 +246,10 @@ submitPrevious.addEventListener ("click", function() {
 */
 function setAnswer(answer) {
   fillChoice(answer);
-  if ( (subjects.length -1) != currentSubject) {
+  if (currentSubject != (subjects.length -1)) {
     //no entry
     currentSubject++;
-    titel.innerHTML = subjects[currentSubject].title;
-    statement.innerHTML = subjects[currentSubject].statement;
+    showSubject();
     answerBackground();
   } else {
     show(submit);
@@ -280,7 +281,7 @@ function answerBackground() {
 }
 
 /*
-* this gives the array a boolean so that the checkQuestion function gets the necessary info it needs
+* this gives the array a boolean so that the pointCounting function gets the necessary info it needs
 */
 function checkCheckboxImportant() {
   submit.onsubmit = function(e) {
@@ -294,7 +295,7 @@ function checkCheckboxImportant() {
     } 
     hide(submit);
     show(partySubmit);
-    checkQuestion();
+    pointCounting();
   };
 }
 
