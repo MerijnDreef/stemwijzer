@@ -94,6 +94,7 @@ function fillChoice(insert) {
 
 /*
 * makes things visible
+* @param {object (HTML)} element - Element in the HTML page
 */
 function show(element) {
   element.classList.remove("hidden");
@@ -101,6 +102,7 @@ function show(element) {
 
 /*
 * makes things invisible
+* @param {object (HTML)} element - Element in the HTML page
 */
 function hide(element) {
   element.classList.add("hidden");
@@ -287,11 +289,7 @@ function checkCheckboxImportant() {
   submit.onsubmit = function(e) {
     e.preventDefault();
     for (f = 0; f < questCheckboxes.length; f++) {
-        if (questCheckboxes[f].checked == true) {
-          questImportant[f] = true;
-        } else {
-          questImportant[f] = false;
-        }
+      questImportant[f] = questCheckboxes[f].checked;
     } 
     hide(submit);
     show(partySubmit);
@@ -306,11 +304,7 @@ function checkCheckboxParty() {
   partySubmit.onsubmit = function(e) {
     e.preventDefault();
     for (f = 0; f < choicePoints.length; f++){
-      if (partyCheckboxes[f].checked == true) {
-        chosenParties[f] = true;
-      } else {
-        chosenParties[f] = false;
-      }
+      chosenParties[f] = partyCheckboxes[f].checked;
     } 
     hide(partySubmit);
     show(resultParties);
