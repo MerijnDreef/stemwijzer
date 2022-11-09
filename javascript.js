@@ -1,19 +1,19 @@
 let currentSubject = 0;
 
-const startContainer = document.getElementById("startContainer");
-const startButton = document.getElementById("start");
-const agreeButton = document.getElementById("agree");
-const neitherButton = document.getElementById("neither");
-const disagreeButton = document.getElementById("disagree");
-const titel = document.getElementById("title");
-const statement = document.getElementById("statement");
-const skipButton = document.getElementById("skip");
-const previousButton = document.getElementById("previous");
-const container = document.getElementById("container");
-const submitPrevious = document.getElementById("submitPrevious");
-const submit = document.getElementById("form1");
-const partySubmit = document.getElementById("form2");
-const resultParties = document.getElementById("resultParties");
+const startContainer  = document.getElementById("startContainer");
+const startButton     = document.getElementById("start");
+const agreeButton     = document.getElementById("agree");
+const neitherButton   = document.getElementById("neither");
+const disagreeButton  = document.getElementById("disagree");
+const titel           = document.getElementById("title");
+const statement       = document.getElementById("statement");
+const skipButton      = document.getElementById("skip");
+const previousButton  = document.getElementById("previous");
+const container       = document.getElementById("container");
+const submitPrevious  = document.getElementById("submitPrevious");
+const submit          = document.getElementById("form1");
+const partySubmit     = document.getElementById("form2");
+const resultParties   = document.getElementById("resultParties");
 
 /*
 * this is to start the whole thing
